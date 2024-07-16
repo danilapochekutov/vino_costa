@@ -5,6 +5,11 @@ function sliderIframe(slider1, slider2) {
 		slidesPerView: 1,
 		centeredSlides: true,
 		spaceBetween: 30,
+		loop: true,
+		autoplay: {
+			delay: 5000,
+			disableOnInteraction: false,
+		},
 		pagination: {
 			el: ".crypto-pioneer__pagination",
 			clickable: true,
