@@ -24,18 +24,6 @@ function buttons(classButton, idButton) {
 			}
 		});
 	});
-
-	const autographButton = document.querySelector(".autograph__button");
-	autographButton.addEventListener("click", () => {
-		const url = autographButton.getAttribute("data-url");
-		if (url) {
-			autographButton.setAttribute("disabled", "true");
-			window.open(url, "_blank");
-			setTimeout(() => {
-				autographButton.removeAttribute("disabled");
-			}, 1000);
-		}
-	});
 }
 
 export default buttons;
