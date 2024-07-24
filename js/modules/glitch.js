@@ -21,6 +21,22 @@ function glitch() {
 		el.classList.toggle(className);
 	}
 
+	function runGlitch(el, startImg, secondImg, thirdImg, callback) {
+		const mainImg = el.querySelector(".glitch__img:first-child");
+
+		setTimeout(() => {
+			mainImg.style.backgroundImage = `url(${secondImg})`;
+		}, 250);
+
+		setTimeout(() => {
+			mainImg.style.backgroundImage = `url(${thirdImg})`;
+		}, 500);
+
+		setTimeout(() => {
+			callback();
+		}, 850);
+	}
+
 	function runGlitchToEnd(el) {
 		if (!hasClass(el, "is-active") && !hasClass(el, "is-used")) {
 			addClass(el, "is-active");
@@ -28,20 +44,13 @@ function glitch() {
 			const secondState = el.dataset.secondimg;
 			const thirdState = el.dataset.thirdimg;
 
-			const mainImg = el.querySelector(".glitch__img:first-child");
-			setTimeout(function () {
-				mainImg.style.backgroundImage = "url(" + secondState + ")";
-			}, 250);
-			setTimeout(function () {
-				mainImg.style.backgroundImage = "url(" + thirdState + ")";
-			}, 500);
-			setTimeout(function () {
+			runGlitch(el, firstState, secondState, thirdState, () => {
 				removeClass(el, "is-active");
 				toggleClass(el, "is-used");
 				if (hasClass(el, "has-mouseout")) {
 					runGlitchToStart(el);
 				}
-			}, 850);
+			});
 		}
 	}
 
@@ -50,50 +59,39 @@ function glitch() {
 			addClass(el, "is-active");
 			const firstState = el.dataset.firstimg;
 			const secondState = el.dataset.secondimg;
-			const thirdState = el.dataset.thirdimg;
 
-			const mainImg = el.querySelector(".glitch__img:first-child");
-			setTimeout(function () {
-				mainImg.style.backgroundImage = "url(" + secondState + ")";
-			}, 250);
-			setTimeout(function () {
-				mainImg.style.backgroundImage = "url(" + firstState + ")";
-			}, 500);
-			setTimeout(function () {
+			runGlitch(el, secondState, firstState, firstState, () => {
 				removeClass(el, "is-active");
 				toggleClass(el, "is-used");
-			}, 850);
+			});
 		}
 	}
 
 	if (glitchList.length > 0) {
 		let sleep = 500;
-		glitchList.forEach(function (el) {
-			setTimeout(function () {
-				runGlitchToEnd(el);
-			}, sleep);
+		glitchList.forEach((el) => {
+			setTimeout(() => runGlitchToEnd(el), sleep);
 			sleep += 1000;
 		});
 
 		let sleepReset = 300;
-		setTimeout(function () {
-			glitchList.forEach(function (el) {
-				setTimeout(function () {
-					runGlitchToStart(el);
-				}, sleepReset);
+
+		setTimeout(() => {
+			glitchList.forEach((el) => {
+				setTimeout(() => runGlitchToStart(el), sleepReset);
 				sleepReset += 500;
 			});
 		}, 3500);
 
-		setTimeout(function () {
-			glitchList.forEach(function (el) {
-				el.addEventListener("mouseover", function (e) {
+		setTimeout(() => {
+			glitchList.forEach((el) => {
+				el.addEventListener("mouseover", (e) => {
 					addClass(el, "has-mouseover");
 					removeClass(el, "has-mouseout");
 					runGlitchToEnd(el);
 					e.preventDefault();
 				});
-				el.addEventListener("mouseout", function (e) {
+				el.addEventListener("mouseout", (e) => {
 					addClass(el, "has-mouseout");
 					removeClass(el, "has-mouseover");
 					runGlitchToStart(el);

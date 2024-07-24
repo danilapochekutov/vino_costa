@@ -1,26 +1,4 @@
-import Swiper from "swiper";
-
 function creativeSpace(container) {
-	const swiperEl = document.querySelector("creative-space__container");
-	const swiper = new Swiper(swiperEl, {
-		centeredSlides: true,
-		initialSlide: 3,
-		loop: true,
-		slidesPerView: 3.8,
-		spaceBetween: 8,
-		grabCursor: true,
-		// breakpoints: {
-		// 	1200: {
-		// 		slidesPerView: 3,
-		// 		spaceBetween: 8,
-		// 	},
-		// 	360: {
-		// 		slidesPerView: 1.5,
-		// 		spaceBetween: 8,
-		// 	},
-		// },
-	});
-
 	function pauseVideo(video) {
 		if (video) {
 			video.pause();
@@ -60,10 +38,6 @@ function creativeSpace(container) {
 	}
 
 	manageVideos();
-
-	swiper.on("slideChange", function () {
-		manageVideos();
-	});
 
 	const soundButtons = document.querySelectorAll(".sound-toggle");
 	soundButtons.forEach((button) => {
