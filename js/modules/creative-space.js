@@ -53,24 +53,6 @@ function creativeSpace(container) {
 		childList: true,
 		subtree: true,
 	});
-
-	function updateSlidesPerView() {
-		const swiperContainer = document.querySelector(".creative-space__container");
-		const windowWidth = window.innerWidth;
-
-		if (windowWidth < 768) {
-			swiperContainer.setAttribute("slides-per-view", "1.5");
-		} else if (windowWidth >= 768 && windowWidth < 1200) {
-			swiperContainer.setAttribute("slides-per-view", "3");
-		} else {
-			swiperContainer.setAttribute("slides-per-view", "3.8");
-		}
-	}
-
-	window.addEventListener("resize", updateSlidesPerView);
-	window.addEventListener("orientationchange", updateSlidesPerView);
-	window.addEventListener("load", updateSlidesPerView);
-	updateSlidesPerView();
 }
 
 export default creativeSpace;

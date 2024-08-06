@@ -68,7 +68,7 @@ function glitch() {
 	}
 
 	if (glitchList.length > 0) {
-		let sleep = 500;
+		let sleep = 2000;
 		glitchList.forEach((el) => {
 			setTimeout(() => runGlitchToEnd(el), sleep);
 			sleep += 1000;
