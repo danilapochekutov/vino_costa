@@ -110,10 +110,8 @@ function animation() {
 					(entries) => {
 						entries.forEach((entry) => {
 							if (entry.isIntersecting) {
-								// Блок появился на экране - запускаем видео
 								handleSlideChange(swiper);
 							} else {
-								// Блок вышел с экрана - останавливаем видео
 								stopActiveSlideVideo(swiper);
 							}
 						});
@@ -124,6 +122,39 @@ function animation() {
 				);
 
 				observer.observe(box);
+			}
+			if (box.classList.contains("offer__slider")) {
+				animateSlider();
+			}
+			if (box.classList.contains("reviews__container")) {
+				const viewMoreContent = document.querySelectorAll(".view");
+				viewMoreContent.forEach((content) => {
+					content.classList.add("animate__animated", "animate__fadeInLeft");
+				});
+			}
+			if (box.classList.contains("nfts")) {
+				const resize = document.querySelector(".nfts__resize");
+				const divider = document.querySelector(".nfts__divider");
+				const title = document.querySelector(".nfts__title--white");
+				if (resize) {
+					resize.style.animation = "sliderAnimation 5s linear";
+					title.style.animation = "titleAnimation 5s linear";
+					setTimeout(() => {
+						divider.style.opacity = "1";
+					}, 5000);
+				}
+			}
+			if (box.classList.contains("go-animation")) {
+				const text = document.querySelectorAll(".guarantee__text");
+				text.forEach((e, i) => {
+					e.classList.add(`str${i}`);
+				});
+				const textMin = document.querySelectorAll(".guarantee__text-min");
+				if (textMin) {
+					textMin.forEach((e, i) => {
+						e.classList.add(`str${i}`);
+					});
+				}
 			}
 		},
 	});
@@ -154,31 +185,13 @@ function handleSlideChange(swiper) {
 				iframe.src = dataSrc + "&autoplay=1";
 			} else {
 				iframe.src = "";
-				// setTimeout(() => {
-				// 	iframe.src = dataSrc;
-				// }, 200);
+				setTimeout(() => {
+					iframe.src = dataSrc;
+				}, 200);
 			}
 		}
 	});
 }
-
-// Воспроизведение видео на активном слайде при появлении блока на экране
-// function playActiveSlideVideo(swiper) {
-// 	const activeSlide = swiper.slides[swiper.activeIndex];
-// 	const iframe = activeSlide.querySelector(".video-iframe");
-
-// 	if (iframe) {
-// 		const dataSrc = iframe.getAttribute("data-src");
-// 		if (dataSrc) {
-// 			iframe.src = dataSrc + "&autoplay=1";
-// 		} else {
-// 			iframe.src = "";
-// 			// setTimeout(() => {
-// 			// 	iframe.src = dataSrc;
-// 			// }, 100);
-// 		}
-// 	}
-// }
 
 // Остановка видео на активном слайде при скрытии блока с экрана
 function stopActiveSlideVideo(swiper) {
@@ -188,6 +201,40 @@ function stopActiveSlideVideo(swiper) {
 	if (iframe) {
 		iframe.src = "";
 	}
+}
+
+// Анимация ползунка
+function animateSlider() {
+	const sliderInput = document.getElementById("sliderInput");
+	const rightValue = document.getElementById("rightValue");
+	const emojiImage = document.getElementById("emojiImage");
+
+	let startValue = parseInt(sliderInput.value);
+	const endValue = parseInt(sliderInput.max);
+
+	// Анимация ползунка
+	function animate() {
+		if (startValue < endValue) {
+			startValue += 50; // скорость увеличения
+			sliderInput.value = startValue;
+			rightValue.textContent = startValue.toLocaleString("en-US");
+
+			// Изменение изображения эмодзи
+			if (startValue >= 1000 && startValue < 2000) {
+				emojiImage.src = "./icons/offer/1-2.svg";
+			} else if (startValue >= 2000 && startValue < 5000) {
+				emojiImage.src = "./icons/offer/2-5.svg";
+			} else if (startValue >= 5000 && startValue < 7000) {
+				emojiImage.src = "./icons/offer/5-7.svg";
+			} else if (startValue >= 7000 && startValue <= 10000) {
+				emojiImage.src = "./icons/offer/7-10.svg";
+			}
+
+			requestAnimationFrame(animate);
+		}
+	}
+
+	requestAnimationFrame(animate);
 }
 
 export default animation;

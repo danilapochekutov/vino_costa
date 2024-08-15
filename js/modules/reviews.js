@@ -9,15 +9,26 @@ function reviews(container) {
 	Button.addEventListener("click", () => {
 		viewMoreContent.forEach((content) => {
 			if (isContentVisible) {
-				content.classList.remove("animate__fadeInLeft");
-				content.classList.add("animate__fadeOutLeft");
+				// Удаляем класс с первой анимацией и добавляем с другой
+				content.classList.remove(
+					"animate__animated",
+					"animate__fadeInLeft",
+					"reviews-animation-set-1",
+				);
+				content.classList.add(
+					"animate__animated",
+					"animate__fadeOutLeft",
+					"reviews-animation-set-2",
+				);
+
 				Button.setAttribute("disabled", "true");
 				setTimeout(() => {
 					content.style.display = "none";
 					Button.textContent = "View More";
 					Button.removeAttribute("disabled");
 					window.scrollTo(0, scrollPosition);
-				}, 700);
+				}, 950);
+
 				if (windowWidth < 768) {
 					hideContainer.forEach((e) => {
 						setTimeout(() => {
@@ -29,10 +40,20 @@ function reviews(container) {
 				}
 			} else {
 				scrollPosition = window.scrollY;
-				content.classList.remove("animate__fadeOutLeft");
-				content.classList.add("animate__fadeInLeft");
+				content.classList.remove(
+					"animate__animated",
+					"animate__fadeOutLeft",
+					"reviews-animation-set-2",
+				);
+				content.classList.add(
+					"animate__animated",
+					"animate__fadeInLeft",
+					"reviews-animation-set-1",
+				);
+
 				content.style.display = "block";
 				Button.textContent = "Hide Reviews";
+
 				if (windowWidth < 768) {
 					hideContainer.forEach((e) => {
 						e.style.display = "block";
