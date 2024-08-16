@@ -144,16 +144,15 @@ function animation() {
 					}, 5000);
 				}
 			}
-			if (box.classList.contains("go-animation")) {
-				const text = document.querySelectorAll(".guarantee__text");
-				text.forEach((e, i) => {
-					e.classList.add(`str${i}`);
-				});
-				const textMin = document.querySelectorAll(".guarantee__text-min");
+			if (box.classList.contains("animation-go")) {
+				const text = document.querySelector(".guarantee__text span");
+				if (text) {
+					text.classList.add("type");
+				}
+
+				const textMin = document.querySelector(".guarantee__text-min span");
 				if (textMin) {
-					textMin.forEach((e, i) => {
-						e.classList.add(`str${i}`);
-					});
+					textMin.classList.add("type");
 				}
 			}
 		},
