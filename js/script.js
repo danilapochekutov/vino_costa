@@ -19,10 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	animation();
 	counter(".user-trust__count");
 	creativeSpace(".creative-space__container");
-	showreel(".showreel__container");
+	showreel();
 	slider(".move-it.slider");
 	slider(".nfts.slider", { changeColor: true });
-	sliderIframe(".crypto-pioneer__container");
+	sliderIframe();
 	emojiSlider();
 	areasWork(".see-more");
 	reviews(".reviews__view-more");
