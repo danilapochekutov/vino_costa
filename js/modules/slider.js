@@ -1,4 +1,3 @@
-// slider.js
 function initializeSlider(slider, options = {}) {
 	const resizeElement = slider.querySelector(".slider__resize");
 	const divider = slider.querySelector(".slider__divider");
@@ -80,8 +79,10 @@ function initializeSlider(slider, options = {}) {
 function updateSliderWidth(slider) {
 	const resizeElement = slider.querySelector(".slider__resize");
 	const compSliderWidth = slider.offsetWidth + "px";
-	const img = resizeElement.querySelector("img");
-	img.style.width = compSliderWidth;
+	const img = resizeElement.querySelectorAll("img");
+	img.forEach((e) => {
+		e.style.width = compSliderWidth;
+	});
 }
 
 function slider(container, options = {}) {
