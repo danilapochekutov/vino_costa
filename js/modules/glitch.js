@@ -23,13 +23,21 @@ function glitch() {
 
 	function runGlitch(el, startImg, secondImg, thirdImg, callback) {
 		const mainImg = el.querySelector(".glitch__img:first-child");
+		let isMobile = window.matchMedia("(max-width: 768px)").matches;
+		let secondImgMobile =
+			secondImg.split(".")[0] +
+			secondImg.split(".")[1] +
+			"-mobile." +
+			secondImg.split(".")[2];
+		let thirdImgMobile =
+			thirdImg.split(".")[0] + thirdImg.split(".")[1] + "-mobile." + thirdImg.split(".")[2];
 
 		setTimeout(() => {
-			mainImg.style.backgroundImage = `url(${secondImg})`;
+			mainImg.style.backgroundImage = `url(${isMobile ? secondImgMobile : secondImg})`;
 		}, 250);
 
 		setTimeout(() => {
-			mainImg.style.backgroundImage = `url(${thirdImg})`;
+			mainImg.style.backgroundImage = `url(${isMobile ? thirdImgMobile : thirdImg})`;
 		}, 500);
 
 		setTimeout(() => {
