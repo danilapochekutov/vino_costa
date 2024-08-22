@@ -23,27 +23,43 @@ function glitch() {
 
 	function runGlitch(el, startImg, secondImg, thirdImg, callback) {
 		const mainImg = el.querySelector(".glitch__img:first-child");
-		let isMobile = window.matchMedia("(max-width: 768px)").matches;
-		let secondImgMobile =
-			secondImg.split(".")[0] +
-			secondImg.split(".")[1] +
-			"-mobile." +
-			secondImg.split(".")[2];
-		let thirdImgMobile =
-			thirdImg.split(".")[0] + thirdImg.split(".")[1] + "-mobile." + thirdImg.split(".")[2];
 
 		setTimeout(() => {
-			mainImg.style.backgroundImage = `url(${isMobile ? secondImgMobile : secondImg})`;
+			mainImg.style.backgroundImage = `url(${secondImg})`;
 		}, 250);
 
 		setTimeout(() => {
-			mainImg.style.backgroundImage = `url(${isMobile ? thirdImgMobile : thirdImg})`;
+			mainImg.style.backgroundImage = `url(${thirdImg})`;
 		}, 500);
 
 		setTimeout(() => {
 			callback();
 		}, 850);
 	}
+
+	// function runGlitch(el, startImg, secondImg, thirdImg, callback) {
+	// 	const mainImg = el.querySelector(".glitch__img:first-child");
+	// 	let isMobile = window.matchMedia("(max-width: 768px)").matches;
+	// 	let secondImgMobile =
+	// 		secondImg.split(".")[0] +
+	// 		secondImg.split(".")[1] +
+	// 		"-mobile." +
+	// 		secondImg.split(".")[2];
+	// 	let thirdImgMobile =
+	// 		thirdImg.split(".")[0] + thirdImg.split(".")[1] + "-mobile." + thirdImg.split(".")[2];
+
+	// 	setTimeout(() => {
+	// 		mainImg.style.backgroundImage = url(${isMobile ? secondImgMobile : secondImg});
+	// 	}, 250);
+
+	// 	setTimeout(() => {
+	// 		mainImg.style.backgroundImage = url(${isMobile ? thirdImgMobile : thirdImg});
+	// 	}, 500);
+
+	// 	setTimeout(() => {
+	// 		callback();
+	// 	}, 850);
+	// }
 
 	function runGlitchToEnd(el) {
 		if (!hasClass(el, "is-active") && !hasClass(el, "is-used")) {
